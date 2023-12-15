@@ -1,588 +1,172 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.doDuring = exports.during = exports.wrapSync = undefined;
-exports.selectSeries = exports.selectLimit = exports.select = exports.foldr = exports.foldl = exports.inject = exports.forEachOfLimit = exports.forEachOfSeries = exports.forEachOf = exports.forEachLimit = exports.forEachSeries = exports.forEach = exports.flatMapSeries = exports.flatMapLimit = exports.flatMap = exports.findSeries = exports.findLimit = exports.find = exports.anySeries = exports.anyLimit = exports.any = exports.allSeries = exports.allLimit = exports.all = exports.whilst = exports.waterfall = exports.until = exports.unmemoize = exports.tryEach = exports.transform = exports.timesSeries = exports.timesLimit = exports.times = exports.timeout = exports.sortBy = exports.someSeries = exports.someLimit = exports.some = exports.setImmediate = exports.series = exports.seq = exports.retryable = exports.retry = exports.rejectSeries = exports.rejectLimit = exports.reject = exports.reflectAll = exports.reflect = exports.reduceRight = exports.reduce = exports.race = exports.queue = exports.priorityQueue = exports.parallelLimit = exports.parallel = exports.nextTick = exports.memoize = exports.mapValuesSeries = exports.mapValuesLimit = exports.mapValues = exports.mapSeries = exports.mapLimit = exports.map = exports.log = exports.groupBySeries = exports.groupByLimit = exports.groupBy = exports.forever = exports.filterSeries = exports.filterLimit = exports.filter = exports.everySeries = exports.everyLimit = exports.every = exports.ensureAsync = exports.eachSeries = exports.eachOfSeries = exports.eachOfLimit = exports.eachOf = exports.eachLimit = exports.each = exports.doWhilst = exports.doUntil = exports.dir = exports.detectSeries = exports.detectLimit = exports.detect = exports.constant = exports.concatSeries = exports.concatLimit = exports.concat = exports.compose = exports.cargoQueue = exports.cargo = exports.autoInject = exports.auto = exports.asyncify = exports.applyEachSeries = exports.applyEach = exports.apply = undefined;
-
-var _apply = require('./apply');
-
-var _apply2 = _interopRequireDefault(_apply);
-
-var _applyEach = require('./applyEach');
-
-var _applyEach2 = _interopRequireDefault(_applyEach);
-
-var _applyEachSeries = require('./applyEachSeries');
-
-var _applyEachSeries2 = _interopRequireDefault(_applyEachSeries);
-
-var _asyncify = require('./asyncify');
-
-var _asyncify2 = _interopRequireDefault(_asyncify);
-
-var _auto = require('./auto');
-
-var _auto2 = _interopRequireDefault(_auto);
-
-var _autoInject = require('./autoInject');
-
-var _autoInject2 = _interopRequireDefault(_autoInject);
-
-var _cargo = require('./cargo');
-
-var _cargo2 = _interopRequireDefault(_cargo);
-
-var _cargoQueue = require('./cargoQueue');
-
-var _cargoQueue2 = _interopRequireDefault(_cargoQueue);
-
-var _compose = require('./compose');
-
-var _compose2 = _interopRequireDefault(_compose);
-
-var _concat = require('./concat');
-
-var _concat2 = _interopRequireDefault(_concat);
-
-var _concatLimit = require('./concatLimit');
-
-var _concatLimit2 = _interopRequireDefault(_concatLimit);
-
-var _concatSeries = require('./concatSeries');
-
-var _concatSeries2 = _interopRequireDefault(_concatSeries);
-
-var _constant = require('./constant');
-
-var _constant2 = _interopRequireDefault(_constant);
-
-var _detect = require('./detect');
-
-var _detect2 = _interopRequireDefault(_detect);
-
-var _detectLimit = require('./detectLimit');
-
-var _detectLimit2 = _interopRequireDefault(_detectLimit);
-
-var _detectSeries = require('./detectSeries');
-
-var _detectSeries2 = _interopRequireDefault(_detectSeries);
-
-var _dir = require('./dir');
-
-var _dir2 = _interopRequireDefault(_dir);
-
-var _doUntil = require('./doUntil');
-
-var _doUntil2 = _interopRequireDefault(_doUntil);
-
-var _doWhilst = require('./doWhilst');
-
-var _doWhilst2 = _interopRequireDefault(_doWhilst);
-
-var _each = require('./each');
-
-var _each2 = _interopRequireDefault(_each);
-
-var _eachLimit = require('./eachLimit');
-
-var _eachLimit2 = _interopRequireDefault(_eachLimit);
-
-var _eachOf = require('./eachOf');
-
-var _eachOf2 = _interopRequireDefault(_eachOf);
-
-var _eachOfLimit = require('./eachOfLimit');
-
-var _eachOfLimit2 = _interopRequireDefault(_eachOfLimit);
-
-var _eachOfSeries = require('./eachOfSeries');
-
-var _eachOfSeries2 = _interopRequireDefault(_eachOfSeries);
-
-var _eachSeries = require('./eachSeries');
-
-var _eachSeries2 = _interopRequireDefault(_eachSeries);
-
-var _ensureAsync = require('./ensureAsync');
-
-var _ensureAsync2 = _interopRequireDefault(_ensureAsync);
-
-var _every = require('./every');
-
-var _every2 = _interopRequireDefault(_every);
-
-var _everyLimit = require('./everyLimit');
-
-var _everyLimit2 = _interopRequireDefault(_everyLimit);
-
-var _everySeries = require('./everySeries');
-
-var _everySeries2 = _interopRequireDefault(_everySeries);
-
-var _filter = require('./filter');
-
-var _filter2 = _interopRequireDefault(_filter);
-
-var _filterLimit = require('./filterLimit');
-
-var _filterLimit2 = _interopRequireDefault(_filterLimit);
-
-var _filterSeries = require('./filterSeries');
-
-var _filterSeries2 = _interopRequireDefault(_filterSeries);
-
-var _forever = require('./forever');
-
-var _forever2 = _interopRequireDefault(_forever);
-
-var _groupBy = require('./groupBy');
-
-var _groupBy2 = _interopRequireDefault(_groupBy);
-
-var _groupByLimit = require('./groupByLimit');
-
-var _groupByLimit2 = _interopRequireDefault(_groupByLimit);
-
-var _groupBySeries = require('./groupBySeries');
-
-var _groupBySeries2 = _interopRequireDefault(_groupBySeries);
-
-var _log = require('./log');
-
-var _log2 = _interopRequireDefault(_log);
-
-var _map = require('./map');
-
-var _map2 = _interopRequireDefault(_map);
-
-var _mapLimit = require('./mapLimit');
-
-var _mapLimit2 = _interopRequireDefault(_mapLimit);
-
-var _mapSeries = require('./mapSeries');
-
-var _mapSeries2 = _interopRequireDefault(_mapSeries);
-
-var _mapValues = require('./mapValues');
-
-var _mapValues2 = _interopRequireDefault(_mapValues);
-
-var _mapValuesLimit = require('./mapValuesLimit');
-
-var _mapValuesLimit2 = _interopRequireDefault(_mapValuesLimit);
-
-var _mapValuesSeries = require('./mapValuesSeries');
-
-var _mapValuesSeries2 = _interopRequireDefault(_mapValuesSeries);
-
-var _memoize = require('./memoize');
-
-var _memoize2 = _interopRequireDefault(_memoize);
-
-var _nextTick = require('./nextTick');
-
-var _nextTick2 = _interopRequireDefault(_nextTick);
-
-var _parallel = require('./parallel');
-
-var _parallel2 = _interopRequireDefault(_parallel);
-
-var _parallelLimit = require('./parallelLimit');
-
-var _parallelLimit2 = _interopRequireDefault(_parallelLimit);
-
-var _priorityQueue = require('./priorityQueue');
-
-var _priorityQueue2 = _interopRequireDefault(_priorityQueue);
-
-var _queue = require('./queue');
-
-var _queue2 = _interopRequireDefault(_queue);
-
-var _race = require('./race');
-
-var _race2 = _interopRequireDefault(_race);
-
-var _reduce = require('./reduce');
-
-var _reduce2 = _interopRequireDefault(_reduce);
-
-var _reduceRight = require('./reduceRight');
-
-var _reduceRight2 = _interopRequireDefault(_reduceRight);
-
-var _reflect = require('./reflect');
-
-var _reflect2 = _interopRequireDefault(_reflect);
-
-var _reflectAll = require('./reflectAll');
-
-var _reflectAll2 = _interopRequireDefault(_reflectAll);
-
-var _reject = require('./reject');
-
-var _reject2 = _interopRequireDefault(_reject);
-
-var _rejectLimit = require('./rejectLimit');
-
-var _rejectLimit2 = _interopRequireDefault(_rejectLimit);
-
-var _rejectSeries = require('./rejectSeries');
-
-var _rejectSeries2 = _interopRequireDefault(_rejectSeries);
-
-var _retry = require('./retry');
-
-var _retry2 = _interopRequireDefault(_retry);
-
-var _retryable = require('./retryable');
-
-var _retryable2 = _interopRequireDefault(_retryable);
-
-var _seq = require('./seq');
-
-var _seq2 = _interopRequireDefault(_seq);
-
-var _series = require('./series');
-
-var _series2 = _interopRequireDefault(_series);
-
-var _setImmediate = require('./setImmediate');
-
-var _setImmediate2 = _interopRequireDefault(_setImmediate);
-
-var _some = require('./some');
-
-var _some2 = _interopRequireDefault(_some);
-
-var _someLimit = require('./someLimit');
-
-var _someLimit2 = _interopRequireDefault(_someLimit);
-
-var _someSeries = require('./someSeries');
-
-var _someSeries2 = _interopRequireDefault(_someSeries);
-
-var _sortBy = require('./sortBy');
-
-var _sortBy2 = _interopRequireDefault(_sortBy);
-
-var _timeout = require('./timeout');
-
-var _timeout2 = _interopRequireDefault(_timeout);
-
-var _times = require('./times');
-
-var _times2 = _interopRequireDefault(_times);
-
-var _timesLimit = require('./timesLimit');
-
-var _timesLimit2 = _interopRequireDefault(_timesLimit);
-
-var _timesSeries = require('./timesSeries');
-
-var _timesSeries2 = _interopRequireDefault(_timesSeries);
-
-var _transform = require('./transform');
-
-var _transform2 = _interopRequireDefault(_transform);
-
-var _tryEach = require('./tryEach');
-
-var _tryEach2 = _interopRequireDefault(_tryEach);
-
-var _unmemoize = require('./unmemoize');
-
-var _unmemoize2 = _interopRequireDefault(_unmemoize);
-
-var _until = require('./until');
-
-var _until2 = _interopRequireDefault(_until);
-
-var _waterfall = require('./waterfall');
-
-var _waterfall2 = _interopRequireDefault(_waterfall);
-
-var _whilst = require('./whilst');
-
-var _whilst2 = _interopRequireDefault(_whilst);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * An "async function" in the context of Async is an asynchronous function with
- * a variable number of parameters, with the final parameter being a callback.
- * (`function (arg1, arg2, ..., callback) {}`)
- * The final callback is of the form `callback(err, results...)`, which must be
- * called once the function is completed.  The callback should be called with a
- * Error as its first argument to signal that an error occurred.
- * Otherwise, if no error occurred, it should be called with `null` as the first
- * argument, and any additional `result` arguments that may apply, to signal
- * successful completion.
- * The callback must be called exactly once, ideally on a later tick of the
- * JavaScript event loop.
- *
- * This type of function is also referred to as a "Node-style async function",
- * or a "continuation passing-style function" (CPS). Most of the methods of this
- * library are themselves CPS/Node-style async functions, or functions that
- * return CPS/Node-style async functions.
- *
- * Wherever we accept a Node-style async function, we also directly accept an
- * [ES2017 `async` function]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function}.
- * In this case, the `async` function will not be passed a final callback
- * argument, and any thrown error will be used as the `err` argument of the
- * implicit callback, and the return value will be used as the `result` value.
- * (i.e. a `rejected` of the returned Promise becomes the `err` callback
- * argument, and a `resolved` value becomes the `result`.)
- *
- * Note, due to JavaScript limitations, we can only detect native `async`
- * functions and not transpilied implementations.
- * Your environment must have `async`/`await` support for this to work.
- * (e.g. Node > v7.6, or a recent version of a modern browser).
- * If you are using `async` functions through a transpiler (e.g. Babel), you
- * must still wrap the function with [asyncify]{@link module:Utils.asyncify},
- * because the `async function` will be compiled to an ordinary function that
- * returns a promise.
- *
- * @typedef {Function} AsyncFunction
- * @static
- */
-
-/**
- * Async is a utility module which provides straight-forward, powerful functions
- * for working with asynchronous JavaScript. Although originally designed for
- * use with [Node.js](http://nodejs.org) and installable via
- * `npm install --save async`, it can also be used directly in the browser.
- * @module async
- * @see AsyncFunction
- */
-
-/**
- * A collection of `async` functions for manipulating collections, such as
- * arrays and objects.
- * @module Collections
- */
-
-/**
- * A collection of `async` functions for controlling the flow through a script.
- * @module ControlFlow
- */
-
-/**
- * A collection of `async` utility functions.
- * @module Utils
- */
-
-exports.default = {
-    apply: _apply2.default,
-    applyEach: _applyEach2.default,
-    applyEachSeries: _applyEachSeries2.default,
-    asyncify: _asyncify2.default,
-    auto: _auto2.default,
-    autoInject: _autoInject2.default,
-    cargo: _cargo2.default,
-    cargoQueue: _cargoQueue2.default,
-    compose: _compose2.default,
-    concat: _concat2.default,
-    concatLimit: _concatLimit2.default,
-    concatSeries: _concatSeries2.default,
-    constant: _constant2.default,
-    detect: _detect2.default,
-    detectLimit: _detectLimit2.default,
-    detectSeries: _detectSeries2.default,
-    dir: _dir2.default,
-    doUntil: _doUntil2.default,
-    doWhilst: _doWhilst2.default,
-    each: _each2.default,
-    eachLimit: _eachLimit2.default,
-    eachOf: _eachOf2.default,
-    eachOfLimit: _eachOfLimit2.default,
-    eachOfSeries: _eachOfSeries2.default,
-    eachSeries: _eachSeries2.default,
-    ensureAsync: _ensureAsync2.default,
-    every: _every2.default,
-    everyLimit: _everyLimit2.default,
-    everySeries: _everySeries2.default,
-    filter: _filter2.default,
-    filterLimit: _filterLimit2.default,
-    filterSeries: _filterSeries2.default,
-    forever: _forever2.default,
-    groupBy: _groupBy2.default,
-    groupByLimit: _groupByLimit2.default,
-    groupBySeries: _groupBySeries2.default,
-    log: _log2.default,
-    map: _map2.default,
-    mapLimit: _mapLimit2.default,
-    mapSeries: _mapSeries2.default,
-    mapValues: _mapValues2.default,
-    mapValuesLimit: _mapValuesLimit2.default,
-    mapValuesSeries: _mapValuesSeries2.default,
-    memoize: _memoize2.default,
-    nextTick: _nextTick2.default,
-    parallel: _parallel2.default,
-    parallelLimit: _parallelLimit2.default,
-    priorityQueue: _priorityQueue2.default,
-    queue: _queue2.default,
-    race: _race2.default,
-    reduce: _reduce2.default,
-    reduceRight: _reduceRight2.default,
-    reflect: _reflect2.default,
-    reflectAll: _reflectAll2.default,
-    reject: _reject2.default,
-    rejectLimit: _rejectLimit2.default,
-    rejectSeries: _rejectSeries2.default,
-    retry: _retry2.default,
-    retryable: _retryable2.default,
-    seq: _seq2.default,
-    series: _series2.default,
-    setImmediate: _setImmediate2.default,
-    some: _some2.default,
-    someLimit: _someLimit2.default,
-    someSeries: _someSeries2.default,
-    sortBy: _sortBy2.default,
-    timeout: _timeout2.default,
-    times: _times2.default,
-    timesLimit: _timesLimit2.default,
-    timesSeries: _timesSeries2.default,
-    transform: _transform2.default,
-    tryEach: _tryEach2.default,
-    unmemoize: _unmemoize2.default,
-    until: _until2.default,
-    waterfall: _waterfall2.default,
-    whilst: _whilst2.default,
-
-    // aliases
-    all: _every2.default,
-    allLimit: _everyLimit2.default,
-    allSeries: _everySeries2.default,
-    any: _some2.default,
-    anyLimit: _someLimit2.default,
-    anySeries: _someSeries2.default,
-    find: _detect2.default,
-    findLimit: _detectLimit2.default,
-    findSeries: _detectSeries2.default,
-    flatMap: _concat2.default,
-    flatMapLimit: _concatLimit2.default,
-    flatMapSeries: _concatSeries2.default,
-    forEach: _each2.default,
-    forEachSeries: _eachSeries2.default,
-    forEachLimit: _eachLimit2.default,
-    forEachOf: _eachOf2.default,
-    forEachOfSeries: _eachOfSeries2.default,
-    forEachOfLimit: _eachOfLimit2.default,
-    inject: _reduce2.default,
-    foldl: _reduce2.default,
-    foldr: _reduceRight2.default,
-    select: _filter2.default,
-    selectLimit: _filterLimit2.default,
-    selectSeries: _filterSeries2.default,
-    wrapSync: _asyncify2.default,
-    during: _whilst2.default,
-    doDuring: _doWhilst2.default
-};
-exports.apply = _apply2.default;
-exports.applyEach = _applyEach2.default;
-exports.applyEachSeries = _applyEachSeries2.default;
-exports.asyncify = _asyncify2.default;
-exports.auto = _auto2.default;
-exports.autoInject = _autoInject2.default;
-exports.cargo = _cargo2.default;
-exports.cargoQueue = _cargoQueue2.default;
-exports.compose = _compose2.default;
-exports.concat = _concat2.default;
-exports.concatLimit = _concatLimit2.default;
-exports.concatSeries = _concatSeries2.default;
-exports.constant = _constant2.default;
-exports.detect = _detect2.default;
-exports.detectLimit = _detectLimit2.default;
-exports.detectSeries = _detectSeries2.default;
-exports.dir = _dir2.default;
-exports.doUntil = _doUntil2.default;
-exports.doWhilst = _doWhilst2.default;
-exports.each = _each2.default;
-exports.eachLimit = _eachLimit2.default;
-exports.eachOf = _eachOf2.default;
-exports.eachOfLimit = _eachOfLimit2.default;
-exports.eachOfSeries = _eachOfSeries2.default;
-exports.eachSeries = _eachSeries2.default;
-exports.ensureAsync = _ensureAsync2.default;
-exports.every = _every2.default;
-exports.everyLimit = _everyLimit2.default;
-exports.everySeries = _everySeries2.default;
-exports.filter = _filter2.default;
-exports.filterLimit = _filterLimit2.default;
-exports.filterSeries = _filterSeries2.default;
-exports.forever = _forever2.default;
-exports.groupBy = _groupBy2.default;
-exports.groupByLimit = _groupByLimit2.default;
-exports.groupBySeries = _groupBySeries2.default;
-exports.log = _log2.default;
-exports.map = _map2.default;
-exports.mapLimit = _mapLimit2.default;
-exports.mapSeries = _mapSeries2.default;
-exports.mapValues = _mapValues2.default;
-exports.mapValuesLimit = _mapValuesLimit2.default;
-exports.mapValuesSeries = _mapValuesSeries2.default;
-exports.memoize = _memoize2.default;
-exports.nextTick = _nextTick2.default;
-exports.parallel = _parallel2.default;
-exports.parallelLimit = _parallelLimit2.default;
-exports.priorityQueue = _priorityQueue2.default;
-exports.queue = _queue2.default;
-exports.race = _race2.default;
-exports.reduce = _reduce2.default;
-exports.reduceRight = _reduceRight2.default;
-exports.reflect = _reflect2.default;
-exports.reflectAll = _reflectAll2.default;
-exports.reject = _reject2.default;
-exports.rejectLimit = _rejectLimit2.default;
-exports.rejectSeries = _rejectSeries2.default;
-exports.retry = _retry2.default;
-exports.retryable = _retryable2.default;
-exports.seq = _seq2.default;
-exports.series = _series2.default;
-exports.setImmediate = _setImmediate2.default;
-exports.some = _some2.default;
-exports.someLimit = _someLimit2.default;
-exports.someSeries = _someSeries2.default;
-exports.sortBy = _sortBy2.default;
-exports.timeout = _timeout2.default;
-exports.times = _times2.default;
-exports.timesLimit = _timesLimit2.default;
-exports.timesSeries = _timesSeries2.default;
-exports.transform = _transform2.default;
-exports.tryEach = _tryEach2.default;
-exports.unmemoize = _unmemoize2.default;
-exports.until = _until2.default;
-exports.waterfall = _waterfall2.default;
-exports.whilst = _whilst2.default;
-exports.all = _every2.default;
-exports.allLimit = _everyLimit2.default;
-exports.allSeries = _everySeries2.default;
-exports.any = _some2.default;
-exports.anyLimit = _someLimit2.default;
-exports.anySeries = _someSeries2.default;
-exports.find = _detect2.default;
-exports.findLimit = _detectLimit2.default;
-exports.findSeries = _detectSeries2.default;
-exports.flatMap = _concat2.default;
-exports.flatMapLimit = _concatLimit2.default;
-exports.flatMapSeries = _concatSeries2.default;
-exports.forEach = _each2.default;
-exports.forEachSeries = _eachSeries2.default;
-exports.forEachLimit = _eachLimit2.default;
-exports.forEachOf = _eachOf2.default;
-exports.forEachOfSeries = _eachOfSeries2.default;
-exports.forEachOfLimit = _eachOfLimit2.default;
-exports.inject = _reduce2.default;
-exports.foldl = _reduce2.default;
-exports.foldr = _reduceRight2.default;
-exports.select = _filter2.default;
-exports.selectLimit = _filterLimit2.default;
-exports.selectSeries = _filterSeries2.default;
-exports.wrapSync = _asyncify2.default;
-exports.during = _whilst2.default;
-exports.doDuring = _doWhilst2.default;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MongoUnexpectedServerResponseError = exports.MongoTransactionError = exports.MongoTopologyClosedError = exports.MongoTailableCursorError = exports.MongoSystemError = exports.MongoServerSelectionError = exports.MongoServerError = exports.MongoServerClosedError = exports.MongoRuntimeError = exports.MongoParseError = exports.MongoNotConnectedError = exports.MongoNetworkTimeoutError = exports.MongoNetworkError = exports.MongoMissingDependencyError = exports.MongoMissingCredentialsError = exports.MongoKerberosError = exports.MongoInvalidArgumentError = exports.MongoGridFSStreamError = exports.MongoGridFSChunkError = exports.MongoExpiredSessionError = exports.MongoError = exports.MongoDriverError = exports.MongoDecompressionError = exports.MongoCursorInUseError = exports.MongoCursorExhaustedError = exports.MongoCompatibilityError = exports.MongoChangeStreamError = exports.MongoBatchReExecutionError = exports.MongoAzureError = exports.MongoAWSError = exports.MongoAPIError = exports.ChangeStreamCursor = exports.ClientEncryption = exports.MongoBulkWriteError = exports.UUID = exports.Timestamp = exports.ObjectId = exports.MinKey = exports.MaxKey = exports.Long = exports.Int32 = exports.Double = exports.Decimal128 = exports.DBRef = exports.Code = exports.BSONType = exports.BSONSymbol = exports.BSONRegExp = exports.Binary = exports.BSON = void 0;
+exports.ConnectionPoolReadyEvent = exports.ConnectionPoolMonitoringEvent = exports.ConnectionPoolCreatedEvent = exports.ConnectionPoolClosedEvent = exports.ConnectionPoolClearedEvent = exports.ConnectionCreatedEvent = exports.ConnectionClosedEvent = exports.ConnectionCheckOutStartedEvent = exports.ConnectionCheckOutFailedEvent = exports.ConnectionCheckedOutEvent = exports.ConnectionCheckedInEvent = exports.CommandSucceededEvent = exports.CommandStartedEvent = exports.CommandFailedEvent = exports.WriteConcern = exports.ReadPreference = exports.ReadConcern = exports.TopologyType = exports.ServerType = exports.ReadPreferenceMode = exports.ReadConcernLevel = exports.ProfilingLevel = exports.ReturnDocument = exports.ServerApiVersion = exports.ExplainVerbosity = exports.MongoErrorLabel = exports.CURSOR_FLAGS = exports.Compressor = exports.AuthMechanism = exports.GSSAPICanonicalizationValue = exports.AutoEncryptionLoggerLevel = exports.BatchType = exports.UnorderedBulkOperation = exports.OrderedBulkOperation = exports.MongoClient = exports.ListIndexesCursor = exports.ListCollectionsCursor = exports.GridFSBucketWriteStream = exports.GridFSBucketReadStream = exports.GridFSBucket = exports.FindCursor = exports.Db = exports.Collection = exports.ClientSession = exports.ChangeStream = exports.CancellationToken = exports.AggregationCursor = exports.Admin = exports.AbstractCursor = exports.MongoWriteConcernError = void 0;
+exports.MongoCryptKMSRequestNetworkTimeoutError = exports.MongoCryptInvalidArgumentError = exports.MongoCryptError = exports.MongoCryptCreateEncryptedCollectionError = exports.MongoCryptCreateDataKeyError = exports.MongoCryptAzureKMSRequestError = exports.SrvPollingEvent = exports.TopologyOpeningEvent = exports.TopologyDescriptionChangedEvent = exports.TopologyClosedEvent = exports.ServerOpeningEvent = exports.ServerHeartbeatSucceededEvent = exports.ServerHeartbeatStartedEvent = exports.ServerHeartbeatFailedEvent = exports.ServerDescriptionChangedEvent = exports.ServerClosedEvent = exports.ConnectionReadyEvent = void 0;
+const admin_1 = require("./admin");
+Object.defineProperty(exports, "Admin", { enumerable: true, get: function () { return admin_1.Admin; } });
+const ordered_1 = require("./bulk/ordered");
+Object.defineProperty(exports, "OrderedBulkOperation", { enumerable: true, get: function () { return ordered_1.OrderedBulkOperation; } });
+const unordered_1 = require("./bulk/unordered");
+Object.defineProperty(exports, "UnorderedBulkOperation", { enumerable: true, get: function () { return unordered_1.UnorderedBulkOperation; } });
+const change_stream_1 = require("./change_stream");
+Object.defineProperty(exports, "ChangeStream", { enumerable: true, get: function () { return change_stream_1.ChangeStream; } });
+const collection_1 = require("./collection");
+Object.defineProperty(exports, "Collection", { enumerable: true, get: function () { return collection_1.Collection; } });
+const abstract_cursor_1 = require("./cursor/abstract_cursor");
+Object.defineProperty(exports, "AbstractCursor", { enumerable: true, get: function () { return abstract_cursor_1.AbstractCursor; } });
+const aggregation_cursor_1 = require("./cursor/aggregation_cursor");
+Object.defineProperty(exports, "AggregationCursor", { enumerable: true, get: function () { return aggregation_cursor_1.AggregationCursor; } });
+const find_cursor_1 = require("./cursor/find_cursor");
+Object.defineProperty(exports, "FindCursor", { enumerable: true, get: function () { return find_cursor_1.FindCursor; } });
+const list_collections_cursor_1 = require("./cursor/list_collections_cursor");
+Object.defineProperty(exports, "ListCollectionsCursor", { enumerable: true, get: function () { return list_collections_cursor_1.ListCollectionsCursor; } });
+const list_indexes_cursor_1 = require("./cursor/list_indexes_cursor");
+Object.defineProperty(exports, "ListIndexesCursor", { enumerable: true, get: function () { return list_indexes_cursor_1.ListIndexesCursor; } });
+const db_1 = require("./db");
+Object.defineProperty(exports, "Db", { enumerable: true, get: function () { return db_1.Db; } });
+const gridfs_1 = require("./gridfs");
+Object.defineProperty(exports, "GridFSBucket", { enumerable: true, get: function () { return gridfs_1.GridFSBucket; } });
+const download_1 = require("./gridfs/download");
+Object.defineProperty(exports, "GridFSBucketReadStream", { enumerable: true, get: function () { return download_1.GridFSBucketReadStream; } });
+const upload_1 = require("./gridfs/upload");
+Object.defineProperty(exports, "GridFSBucketWriteStream", { enumerable: true, get: function () { return upload_1.GridFSBucketWriteStream; } });
+const mongo_client_1 = require("./mongo_client");
+Object.defineProperty(exports, "MongoClient", { enumerable: true, get: function () { return mongo_client_1.MongoClient; } });
+const mongo_types_1 = require("./mongo_types");
+Object.defineProperty(exports, "CancellationToken", { enumerable: true, get: function () { return mongo_types_1.CancellationToken; } });
+const sessions_1 = require("./sessions");
+Object.defineProperty(exports, "ClientSession", { enumerable: true, get: function () { return sessions_1.ClientSession; } });
+/** @public */
+var bson_1 = require("./bson");
+Object.defineProperty(exports, "BSON", { enumerable: true, get: function () { return bson_1.BSON; } });
+var bson_2 = require("./bson");
+Object.defineProperty(exports, "Binary", { enumerable: true, get: function () { return bson_2.Binary; } });
+Object.defineProperty(exports, "BSONRegExp", { enumerable: true, get: function () { return bson_2.BSONRegExp; } });
+Object.defineProperty(exports, "BSONSymbol", { enumerable: true, get: function () { return bson_2.BSONSymbol; } });
+Object.defineProperty(exports, "BSONType", { enumerable: true, get: function () { return bson_2.BSONType; } });
+Object.defineProperty(exports, "Code", { enumerable: true, get: function () { return bson_2.Code; } });
+Object.defineProperty(exports, "DBRef", { enumerable: true, get: function () { return bson_2.DBRef; } });
+Object.defineProperty(exports, "Decimal128", { enumerable: true, get: function () { return bson_2.Decimal128; } });
+Object.defineProperty(exports, "Double", { enumerable: true, get: function () { return bson_2.Double; } });
+Object.defineProperty(exports, "Int32", { enumerable: true, get: function () { return bson_2.Int32; } });
+Object.defineProperty(exports, "Long", { enumerable: true, get: function () { return bson_2.Long; } });
+Object.defineProperty(exports, "MaxKey", { enumerable: true, get: function () { return bson_2.MaxKey; } });
+Object.defineProperty(exports, "MinKey", { enumerable: true, get: function () { return bson_2.MinKey; } });
+Object.defineProperty(exports, "ObjectId", { enumerable: true, get: function () { return bson_2.ObjectId; } });
+Object.defineProperty(exports, "Timestamp", { enumerable: true, get: function () { return bson_2.Timestamp; } });
+Object.defineProperty(exports, "UUID", { enumerable: true, get: function () { return bson_2.UUID; } });
+var common_1 = require("./bulk/common");
+Object.defineProperty(exports, "MongoBulkWriteError", { enumerable: true, get: function () { return common_1.MongoBulkWriteError; } });
+var client_encryption_1 = require("./client-side-encryption/client_encryption");
+Object.defineProperty(exports, "ClientEncryption", { enumerable: true, get: function () { return client_encryption_1.ClientEncryption; } });
+var change_stream_cursor_1 = require("./cursor/change_stream_cursor");
+Object.defineProperty(exports, "ChangeStreamCursor", { enumerable: true, get: function () { return change_stream_cursor_1.ChangeStreamCursor; } });
+var error_1 = require("./error");
+Object.defineProperty(exports, "MongoAPIError", { enumerable: true, get: function () { return error_1.MongoAPIError; } });
+Object.defineProperty(exports, "MongoAWSError", { enumerable: true, get: function () { return error_1.MongoAWSError; } });
+Object.defineProperty(exports, "MongoAzureError", { enumerable: true, get: function () { return error_1.MongoAzureError; } });
+Object.defineProperty(exports, "MongoBatchReExecutionError", { enumerable: true, get: function () { return error_1.MongoBatchReExecutionError; } });
+Object.defineProperty(exports, "MongoChangeStreamError", { enumerable: true, get: function () { return error_1.MongoChangeStreamError; } });
+Object.defineProperty(exports, "MongoCompatibilityError", { enumerable: true, get: function () { return error_1.MongoCompatibilityError; } });
+Object.defineProperty(exports, "MongoCursorExhaustedError", { enumerable: true, get: function () { return error_1.MongoCursorExhaustedError; } });
+Object.defineProperty(exports, "MongoCursorInUseError", { enumerable: true, get: function () { return error_1.MongoCursorInUseError; } });
+Object.defineProperty(exports, "MongoDecompressionError", { enumerable: true, get: function () { return error_1.MongoDecompressionError; } });
+Object.defineProperty(exports, "MongoDriverError", { enumerable: true, get: function () { return error_1.MongoDriverError; } });
+Object.defineProperty(exports, "MongoError", { enumerable: true, get: function () { return error_1.MongoError; } });
+Object.defineProperty(exports, "MongoExpiredSessionError", { enumerable: true, get: function () { return error_1.MongoExpiredSessionError; } });
+Object.defineProperty(exports, "MongoGridFSChunkError", { enumerable: true, get: function () { return error_1.MongoGridFSChunkError; } });
+Object.defineProperty(exports, "MongoGridFSStreamError", { enumerable: true, get: function () { return error_1.MongoGridFSStreamError; } });
+Object.defineProperty(exports, "MongoInvalidArgumentError", { enumerable: true, get: function () { return error_1.MongoInvalidArgumentError; } });
+Object.defineProperty(exports, "MongoKerberosError", { enumerable: true, get: function () { return error_1.MongoKerberosError; } });
+Object.defineProperty(exports, "MongoMissingCredentialsError", { enumerable: true, get: function () { return error_1.MongoMissingCredentialsError; } });
+Object.defineProperty(exports, "MongoMissingDependencyError", { enumerable: true, get: function () { return error_1.MongoMissingDependencyError; } });
+Object.defineProperty(exports, "MongoNetworkError", { enumerable: true, get: function () { return error_1.MongoNetworkError; } });
+Object.defineProperty(exports, "MongoNetworkTimeoutError", { enumerable: true, get: function () { return error_1.MongoNetworkTimeoutError; } });
+Object.defineProperty(exports, "MongoNotConnectedError", { enumerable: true, get: function () { return error_1.MongoNotConnectedError; } });
+Object.defineProperty(exports, "MongoParseError", { enumerable: true, get: function () { return error_1.MongoParseError; } });
+Object.defineProperty(exports, "MongoRuntimeError", { enumerable: true, get: function () { return error_1.MongoRuntimeError; } });
+Object.defineProperty(exports, "MongoServerClosedError", { enumerable: true, get: function () { return error_1.MongoServerClosedError; } });
+Object.defineProperty(exports, "MongoServerError", { enumerable: true, get: function () { return error_1.MongoServerError; } });
+Object.defineProperty(exports, "MongoServerSelectionError", { enumerable: true, get: function () { return error_1.MongoServerSelectionError; } });
+Object.defineProperty(exports, "MongoSystemError", { enumerable: true, get: function () { return error_1.MongoSystemError; } });
+Object.defineProperty(exports, "MongoTailableCursorError", { enumerable: true, get: function () { return error_1.MongoTailableCursorError; } });
+Object.defineProperty(exports, "MongoTopologyClosedError", { enumerable: true, get: function () { return error_1.MongoTopologyClosedError; } });
+Object.defineProperty(exports, "MongoTransactionError", { enumerable: true, get: function () { return error_1.MongoTransactionError; } });
+Object.defineProperty(exports, "MongoUnexpectedServerResponseError", { enumerable: true, get: function () { return error_1.MongoUnexpectedServerResponseError; } });
+Object.defineProperty(exports, "MongoWriteConcernError", { enumerable: true, get: function () { return error_1.MongoWriteConcernError; } });
+// enums
+var common_2 = require("./bulk/common");
+Object.defineProperty(exports, "BatchType", { enumerable: true, get: function () { return common_2.BatchType; } });
+var auto_encrypter_1 = require("./client-side-encryption/auto_encrypter");
+Object.defineProperty(exports, "AutoEncryptionLoggerLevel", { enumerable: true, get: function () { return auto_encrypter_1.AutoEncryptionLoggerLevel; } });
+var gssapi_1 = require("./cmap/auth/gssapi");
+Object.defineProperty(exports, "GSSAPICanonicalizationValue", { enumerable: true, get: function () { return gssapi_1.GSSAPICanonicalizationValue; } });
+var providers_1 = require("./cmap/auth/providers");
+Object.defineProperty(exports, "AuthMechanism", { enumerable: true, get: function () { return providers_1.AuthMechanism; } });
+var compression_1 = require("./cmap/wire_protocol/compression");
+Object.defineProperty(exports, "Compressor", { enumerable: true, get: function () { return compression_1.Compressor; } });
+var abstract_cursor_2 = require("./cursor/abstract_cursor");
+Object.defineProperty(exports, "CURSOR_FLAGS", { enumerable: true, get: function () { return abstract_cursor_2.CURSOR_FLAGS; } });
+var error_2 = require("./error");
+Object.defineProperty(exports, "MongoErrorLabel", { enumerable: true, get: function () { return error_2.MongoErrorLabel; } });
+var explain_1 = require("./explain");
+Object.defineProperty(exports, "ExplainVerbosity", { enumerable: true, get: function () { return explain_1.ExplainVerbosity; } });
+var mongo_client_2 = require("./mongo_client");
+Object.defineProperty(exports, "ServerApiVersion", { enumerable: true, get: function () { return mongo_client_2.ServerApiVersion; } });
+var find_and_modify_1 = require("./operations/find_and_modify");
+Object.defineProperty(exports, "ReturnDocument", { enumerable: true, get: function () { return find_and_modify_1.ReturnDocument; } });
+var set_profiling_level_1 = require("./operations/set_profiling_level");
+Object.defineProperty(exports, "ProfilingLevel", { enumerable: true, get: function () { return set_profiling_level_1.ProfilingLevel; } });
+var read_concern_1 = require("./read_concern");
+Object.defineProperty(exports, "ReadConcernLevel", { enumerable: true, get: function () { return read_concern_1.ReadConcernLevel; } });
+var read_preference_1 = require("./read_preference");
+Object.defineProperty(exports, "ReadPreferenceMode", { enumerable: true, get: function () { return read_preference_1.ReadPreferenceMode; } });
+var common_3 = require("./sdam/common");
+Object.defineProperty(exports, "ServerType", { enumerable: true, get: function () { return common_3.ServerType; } });
+Object.defineProperty(exports, "TopologyType", { enumerable: true, get: function () { return common_3.TopologyType; } });
+// Helper classes
+var read_concern_2 = require("./read_concern");
+Object.defineProperty(exports, "ReadConcern", { enumerable: true, get: function () { return read_concern_2.ReadConcern; } });
+var read_preference_2 = require("./read_preference");
+Object.defineProperty(exports, "ReadPreference", { enumerable: true, get: function () { return read_preference_2.ReadPreference; } });
+var write_concern_1 = require("./write_concern");
+Object.defineProperty(exports, "WriteConcern", { enumerable: true, get: function () { return write_concern_1.WriteConcern; } });
+// events
+var command_monitoring_events_1 = require("./cmap/command_monitoring_events");
+Object.defineProperty(exports, "CommandFailedEvent", { enumerable: true, get: function () { return command_monitoring_events_1.CommandFailedEvent; } });
+Object.defineProperty(exports, "CommandStartedEvent", { enumerable: true, get: function () { return command_monitoring_events_1.CommandStartedEvent; } });
+Object.defineProperty(exports, "CommandSucceededEvent", { enumerable: true, get: function () { return command_monitoring_events_1.CommandSucceededEvent; } });
+var connection_pool_events_1 = require("./cmap/connection_pool_events");
+Object.defineProperty(exports, "ConnectionCheckedInEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionCheckedInEvent; } });
+Object.defineProperty(exports, "ConnectionCheckedOutEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionCheckedOutEvent; } });
+Object.defineProperty(exports, "ConnectionCheckOutFailedEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionCheckOutFailedEvent; } });
+Object.defineProperty(exports, "ConnectionCheckOutStartedEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionCheckOutStartedEvent; } });
+Object.defineProperty(exports, "ConnectionClosedEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionClosedEvent; } });
+Object.defineProperty(exports, "ConnectionCreatedEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionCreatedEvent; } });
+Object.defineProperty(exports, "ConnectionPoolClearedEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionPoolClearedEvent; } });
+Object.defineProperty(exports, "ConnectionPoolClosedEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionPoolClosedEvent; } });
+Object.defineProperty(exports, "ConnectionPoolCreatedEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionPoolCreatedEvent; } });
+Object.defineProperty(exports, "ConnectionPoolMonitoringEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionPoolMonitoringEvent; } });
+Object.defineProperty(exports, "ConnectionPoolReadyEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionPoolReadyEvent; } });
+Object.defineProperty(exports, "ConnectionReadyEvent", { enumerable: true, get: function () { return connection_pool_events_1.ConnectionReadyEvent; } });
+var events_1 = require("./sdam/events");
+Object.defineProperty(exports, "ServerClosedEvent", { enumerable: true, get: function () { return events_1.ServerClosedEvent; } });
+Object.defineProperty(exports, "ServerDescriptionChangedEvent", { enumerable: true, get: function () { return events_1.ServerDescriptionChangedEvent; } });
+Object.defineProperty(exports, "ServerHeartbeatFailedEvent", { enumerable: true, get: function () { return events_1.ServerHeartbeatFailedEvent; } });
+Object.defineProperty(exports, "ServerHeartbeatStartedEvent", { enumerable: true, get: function () { return events_1.ServerHeartbeatStartedEvent; } });
+Object.defineProperty(exports, "ServerHeartbeatSucceededEvent", { enumerable: true, get: function () { return events_1.ServerHeartbeatSucceededEvent; } });
+Object.defineProperty(exports, "ServerOpeningEvent", { enumerable: true, get: function () { return events_1.ServerOpeningEvent; } });
+Object.defineProperty(exports, "TopologyClosedEvent", { enumerable: true, get: function () { return events_1.TopologyClosedEvent; } });
+Object.defineProperty(exports, "TopologyDescriptionChangedEvent", { enumerable: true, get: function () { return events_1.TopologyDescriptionChangedEvent; } });
+Object.defineProperty(exports, "TopologyOpeningEvent", { enumerable: true, get: function () { return events_1.TopologyOpeningEvent; } });
+var srv_polling_1 = require("./sdam/srv_polling");
+Object.defineProperty(exports, "SrvPollingEvent", { enumerable: true, get: function () { return srv_polling_1.SrvPollingEvent; } });
+var errors_1 = require("./client-side-encryption/errors");
+Object.defineProperty(exports, "MongoCryptAzureKMSRequestError", { enumerable: true, get: function () { return errors_1.MongoCryptAzureKMSRequestError; } });
+Object.defineProperty(exports, "MongoCryptCreateDataKeyError", { enumerable: true, get: function () { return errors_1.MongoCryptCreateDataKeyError; } });
+Object.defineProperty(exports, "MongoCryptCreateEncryptedCollectionError", { enumerable: true, get: function () { return errors_1.MongoCryptCreateEncryptedCollectionError; } });
+Object.defineProperty(exports, "MongoCryptError", { enumerable: true, get: function () { return errors_1.MongoCryptError; } });
+Object.defineProperty(exports, "MongoCryptInvalidArgumentError", { enumerable: true, get: function () { return errors_1.MongoCryptInvalidArgumentError; } });
+Object.defineProperty(exports, "MongoCryptKMSRequestNetworkTimeoutError", { enumerable: true, get: function () { return errors_1.MongoCryptKMSRequestNetworkTimeoutError; } });
+//# sourceMappingURL=index.js.map
