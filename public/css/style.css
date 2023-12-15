@@ -1,0 +1,116 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    /* padding-top: 20%; */
+}
+
+h1,
+.appName {
+    font-size: 2.5em;
+    color: #ff8c00;
+    /* Bright orange */
+    margin-bottom: 0.5em;
+}
+
+p {
+    font-size: 1.2em;
+    color: #bbb;
+    /* Lighter grey for readability */
+    margin-bottom: 2em;
+}
+
+.start-button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.start-button:hover {
+    background-color: #e67e22;
+    transform: scale(1.1);
+}
+
+.fa-treble-clef {
+    color: #ff8c00;
+    font-size: 4em;
+    margin-bottom: 0.5em;
+}
+
+.test {
+    font-size: 10em;
+}
+
+.hidden {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: none; */
+}
+
+#options button,
+.signInButton,
+.signUpButton {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#options button:hover,
+.signInButton:hover,
+.signUpButton:hover {
+    background-color: #e67e22;
+}
+
+.login {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.sublogin {
+    width: 50%;
+
+    background-color: #f4f4f4;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+#scroll1 {
+    text-decoration: none;
+}
+
+.user,
+.pass {
+    padding: 1em;
+}
+
+#mainContent {
+    transition: opacity 1s ease-out;
+    margin-top: 2em;
+}
+
+.playlist-title {
+    cursor: pointer;
+
+}
+
+.song-title {
+    cursor: pointer;
+}

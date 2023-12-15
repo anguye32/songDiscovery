@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/public/css/signupStyle.css">
+    <script src="/public/js/auth.js" defer></script>
+</head>
+
+<body>
+    <!-- FIX HEADER -->
+    <navbar>
+        <a class="appName" href="/">Harmony Scout</a>
+    </navbar>
+    <h1 class="signUpTitle">Sign Up</h1>
+    <!-- <div class="test">
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+            type="module"></script><dotlottie-player
+            src="https://lottie.host/77869019-f206-4d20-8e3d-678597e6be7c/mMOSVZsaWf.json" background="transparent"
+            speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop controls
+            autoplay></dotlottie-player>
+    </div>
+    <div>
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+            type="module"></script>
+
+        <dotlottie-player src="https://lottie.host/6a7430eb-48e2-402b-9032-ef3264741bfb/Gko91jiqtn.json"
+            background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+    </div> -->
+
+    <div class="signUp">
+        <div class="errorDisplay" id="errorDisplay"></div>
+        <div class="subSignUp">
+            <form action="/signup/processingData" id="signUpForm" method="post">
+                <input type="text" class="user" id="username" name="username" placeholder="Enter your username"><br>
+                <input type="email" class="userEmail" id="email" name="email" placeholder="Enter your email"><br>
+                <input type="password" class="pass" id="password" name="password" placeholder="Enter your password"><br>
+                <input type="password" class="reenterPass" name="reenterPass" id="reenterPass"
+                    placeholder="Re-enter your password"><br>
+                <button type="submit" class="signUpButton" id="signUpButton">Sign Up</button>
+                <button type="reset" class="resetButton" id="resetButton">Reset</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>

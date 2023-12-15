@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>User Dashboard - HarmonyScout</title>
+  <link rel="stylesheet" href="/public/css/userStyle.css" />
+  <script src="/public/js/userScript.js" defer></script>
+</head>
+
+<body>
+  <div id="userProfile" class="hidden"></div>
+  <div id="userContent" class="hidden">
+  </div>
+  <div id="songsDisplayArea" class="hidden">
+  </div>
+  <button class="playlist">Your Playlist</button>
+  <button class="exploreButton" onclick="explorePlaylist()">Explore</button>
+  <button class="signout">Sign out</button>
+  <div id="recommendationsArea" class="hidden">
+    <button id="backButton" class="hidden">Back to Playlists</button>
+    <div id="trackListings">
+    </div>
+  </div>
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+  <dotlottie-player src="https://lottie.host/6a7430eb-48e2-402b-9032-ef3264741bfb/Gko91jiqtn.json"
+    background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+
+</body>
+
+</html>

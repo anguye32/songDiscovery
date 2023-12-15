@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+    padding-top: 20%;
+}
+
+.hidden {
+    display: none;
+}
+
+
+#userProfile {
+    margin-top: -350px;
+    text-align: center;
+}
+
+
+#userContent,
+#songsDisplayArea,
+#recommendationsArea {
+    margin-top: 10px;
+    padding: 10px;
+    transition: transform 0.5s ease;
+}
+
+#mainContent {
+    transition: opacity 1s ease-out;
+}
+
+.playlist-title {
+    cursor: pointer;
+}
+
+
+.song-title {
+    cursor: pointer;
+
+}
+
+.move-up {
+    transform: translateY(-300px);
+    transition: transform 0.5s ease-in-out;
+}
+
+#backButton {
+    display: block;
+    margin: 10px auto;
+    color: white;
+}
+
+
+.playlist,
+.exploreButton,
+.signout {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.playlist:hover,
+.exploreButton:hover,
+.signout:hover {
+    background-color: #e67e22;
+}

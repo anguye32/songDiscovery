@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="/public/css/signupStyle.css">
+    <script src="/public/js/auth.js" defer></script>
+</head>
+
+<body>
+    <navbar>
+        <a class="appName" href="/">Harmony Scout</a>
+    </navbar>
+    <h1 class="signInTitle">Log In</h1>
+    <div class="signIn">
+        <div class="errorDisplay" id="errorDisplay"></div>
+        <div class="subSignIn">
+            <form action="/signin/retrieveData" method="post" id="signInForm">
+                <input type="text" class="user" id="username" name="username"
+                    placeholder="Enter your username or email"><br>
+                <input type="password" class="pass" id="password" name="password" placeholder="Enter your password"><br>
+                <button type="submit" class="signInButton" id="signInButton">Log In</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
